@@ -1,0 +1,36 @@
+{
+  "name": "extract.data.sample",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "body-parser": "*",
+    "bootstrap": "*",
+    "cookie-parser": "*",
+    "express": "*",
+    "express-session": "*",
+    "fs": "*",
+    "jquery": "*",
+    "moment": "*",
+    "moment-timezone": "0.5.13",
+    "mongoose": "4.12.3",
+    "nodemailer": "^4.6.7",
+    "nodemailer-smtp-transport": "^2.7.4",
+    "path": "*",
+    "pug": "2.0.0-rc.4",
+    "qr-image": "3.2.0",
+    "request": "^2.81.0",
+    "mocha": "^2.4.5",
+    "randomstring": "^1.1.5",
+    "chai": "^3.5.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {
+    "start": "NODE_ENV=production node start.js",
+    "dev": "node start.js",
+    "nodemon": "nodemon start.js --ignore www/"
+  },
+  "license": "MIT"
+}

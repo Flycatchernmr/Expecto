@@ -1,0 +1,71 @@
+doctype html
+html(lang='en')
+    head
+        title  Magic potion
+        meta(charset='utf-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+        link(rel='stylesheet', href='/../css/main.css')     
+        link(rel='shortcut icon', href='/../img/favicon.png', type='image')
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
+        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+        script.
+            function onVisaCheckoutReady(){
+            V.init( {
+            apikey: "40A4P8CKVBLG9P791OYF21vTN3vH3lZ6y3W_rCq5OJWnhFqE4",
+            paymentRequest:{
+            currencyCode: "USD",
+            total: "10.00"
+            }
+            })
+            V.on("payment.success", function(payment)
+            {alert('success'); 
+            console.log(JSON.stringify(payment)); })
+            V.on("payment.cancel", function(payment)
+            {alert('cancelled'); 
+             alert(JSON.stringify(payment)); })
+            V.on("payment.error", function(payment, error)
+            {alert(JSON.stringify(error)); })
+            }
+    body
+        div(class='container-fluid')  
+            div(class='row')
+                div(class='col-sm-4')
+                    a(class='btn btn-default hidden-xs hidden-sm', href='/') #[i(class='fa fa-home fa-2x', aria-hidden='true')]
+                div(class='col-sm-4')
+                    p   #[h3 Expecto*]
+                div(class='col-sm-4')
+            
+            hr
+            div(class='row')
+                    ul
+                        li
+                            each v, k in Items
+                                div(class='row')
+                                    each val, key in {v}
+                                        div(class='panel-group' ) 
+                                            div(class='panel panel-default')
+                                                div(class='panel neo')
+                                                    p   #[b #{val.name}]
+                                                div(class='panel panel-body')
+
+                                                    div(class='row')
+                                                        div(class='col-sm-1 col-md-4 btn-center')
+                                                            a(class='btn btn-basic')   #[img(src=val.mediumImage, alt='Smiley Image', height='80', class='iconimg hidden-sm img-circle')]
+                                                        div(class='row')
+                                                                div(class='col-sm-3 col-md-2 btn-center')
+                                                                    a(class='btn btn-basic ')   #[b Sale price]
+                                                                    a(class='btn btn-basic')   $#{val.salePrice}
+                                                                div(class='col-sm-2 btn-center')
+                                                                    a(class='btn btn-basic')   #[b Shipping rate]
+                                                                    a(class='btn btn-basic')   $#{val.standardShipRate}
+                                                                div(class='col-sm-1 btn-center')
+                                                                    a(class='btn btn-basic' href=val.addToCartUrl)   #[i(class='fa fa-shopping-cart', aria-hidden='true')]
+                                                                div(class='col-sm-1 btn-center')
+                                                                    a(class='btn btn-basic')   #[b Stock]
+                                                                    a(class='btn btn-basic')   #{val.stock}
+                                                        div(class='row')
+                                                            div(class='col-sm-1 col-md-4 btn-center')
+                                                                a(class='btn btn-basic')   #[img(src="https://sandbox.secure.checkout.visa.com/wallet-services-web/xo/button.png", alt='Visa Checkout', class="v-button", role="button")]
+                                                        script(src="https://sandbox-assets.secure.checkout.visa.com/checkout-widget/resources/js/integration/v1/sdk.js")
