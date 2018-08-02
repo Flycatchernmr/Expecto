@@ -42,8 +42,8 @@ var email = (mailer, res) =>{
         from: gmail_id,
         to: mailer.receiverEmailId,
         subject:  ' Expecto ✔',
-        text:'Dear Friend, Capture your loved ones imagination at http://localhost:3000/grant?username='+mailer.receiverEmailId.substring(0, mailer.receiverEmailId.lastIndexOf("@"))+ '&domain='+mailer.receiverEmailId.substring(mailer.receiverEmailId.lastIndexOf("@") +1)+'. Cheers, Expecto*',
-        html: '<p>Dear Friend, </p><p><i>Capture </i> your loved ones <b>imagination</b> at http://localhost:3000/grant?username='+mailer.receiverEmailId.substring(0, mailer.receiverEmailId.lastIndexOf("@"))+ '&domain='+mailer.receiverEmailId.substring(mailer.receiverEmailId.lastIndexOf("@") +1)+'</p><br/><p>Cheers,</p><p>Expecto*</p>'			   
+        text:'Dear Friend, Celebrate your loved ones imagination at https://pottercharm.herokuapp.com/grant?username='+mailer.receiverEmailId.substring(0, mailer.receiverEmailId.lastIndexOf("@"))+ '&domain='+mailer.receiverEmailId.substring(mailer.receiverEmailId.lastIndexOf("@") +1)+'. Cheers, Expecto*',
+        html: '<p>Dear Friend, </p><p><i>Celebrate </i> your loved ones <b>imagination</b> at https://pottercharm.herokuapp.com/grant?username='+mailer.receiverEmailId.substring(0, mailer.receiverEmailId.lastIndexOf("@"))+ '&domain='+mailer.receiverEmailId.substring(mailer.receiverEmailId.lastIndexOf("@") +1)+'</p><br/><p>Cheers,</p><p>Expecto*</p>'			   
     };
     transporter.sendMail(message, (err) => {
         if (err) {
