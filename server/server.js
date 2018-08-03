@@ -28,11 +28,8 @@ app.use(session({
 // prepare server routing
 app.use('/', express.static(__dirname + '/../www')); // redirect static calls
 app.use('/js', express.static(__dirname + '/../node_modules/bootstrap/dist/js')); // redirect static calls
-app.use('/js', express.static(__dirname + '/../node_modules/jquery/dist')); // redirect static calls
-app.use('/js', express.static(__dirname + '/../node_modules/jstree/dist')); // redirect static calls
 app.use('/js', express.static(__dirname + '/../node_modules/moment/min')); // redirect static calls
 app.use('/css', express.static(__dirname + '/../node_modules/bootstrap/dist/css')); // redirect static calls
-app.use('/css/jstree', express.static(__dirname + '/../node_modules/jstree/dist/themes/default')); // redirect static calls (jstree use 'style.css', which is very generic, so let's use an extra folder)
 app.use('/fonts', express.static(__dirname + '/../node_modules/bootstrap/dist/fonts')); // redirect static calls
 app.set('port', process.env.PORT || 3000); // main port
 
@@ -40,10 +37,11 @@ app.set('port', process.env.PORT || 3000); // main port
 var addChoice = require('./addChoice');
 var email = require('./email');
 var grant = require('./grant');
-//var document = require('./document.js');
+var getPayment = require('./getPayment');
+
+app.use('/payment', getPayment);
 app.use('/wish', addChoice); 
 app.use('/email', email);
 app.use('/grant', grant)
-//app.use('/', datamanagement); // redirect our custom API calls
-//app.use('/qr', document);
+
 module.exports = app;

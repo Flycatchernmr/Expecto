@@ -11,23 +11,47 @@ html(lang='en')
         script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
         script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
         script.
-            function onVisaCheckoutReady(){
+            function onVisaCheckoutReady(subtotal,shippingHandling,tax,giftWrap,discount){
             V.init( {
             apikey: "40A4P8CKVBLG9P791OYF21vTN3vH3lZ6y3W_rCq5OJWnhFqE4",
             paymentRequest:{
             currencyCode: "USD",
-            total: "10.00"
+            subtotal:subtotal||'0',
+            shippingHandling:shippingHandling||'0',
+            tax:tax||'0',
+            giftWrap:giftWrap||'0',
+            discount:discount||'0',
+            total:(subtotal+shippingHandling+tax+giftWrap-discount)||'0',
             }
             })
             V.on("payment.success", function(payment)
-            {alert('success'); 
-            console.log(JSON.stringify(payment)); })
-            V.on("payment.cancel", function(payment)
-            {alert('cancelled'); 
-             alert(JSON.stringify(payment)); })
-            V.on("payment.error", function(payment, error)
-            {alert(JSON.stringify(error)); })
+            {
+            console.log(JSON.stringify(payment));           
+            var url = '/payment'
+            // Init HTTP Request
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', url, true);
+            xhr.setRequestHeader('Content-Type','application/json');
+            // HTTP Request On Load
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                res = xhr.responseText; // HTTP Response Text
+                }
+                else if (xhr.status !== 200) {
+                console.log('Request failed.  Returned status of ' + xhr.status);
+                }
             }
+            var data = {
+                'payment':payment
+            }
+            xhr.send(JSON.stringify(data));
+            })
+            V.on("payment.cancel", function(payment)
+            {console.log('cancelled');  })
+            V.on("payment.error", function(payment, error)
+            {console.log(JSON.stringify(error)); })
+            }
+            
     body
         div(class='container-fluid')  
             div(class='row')
@@ -35,8 +59,7 @@ html(lang='en')
                     a(class='btn btn-default hidden-xs hidden-sm', href='/') #[i(class='fa fa-home fa-2x', aria-hidden='true')]
                 div(class='col-sm-4')
                     p   #[h3 Expecto*]
-                div(class='col-sm-4')
-            
+                div(class='col-sm-4')          
             hr
             div(class='row')
                     ul
@@ -49,7 +72,6 @@ html(lang='en')
                                                 div(class='panel neo')
                                                     p   #[b #{val.name}]
                                                 div(class='panel panel-body')
-
                                                     div(class='row')
                                                         div(class='col-sm-1 col-md-4 btn-center')
                                                             a(class='btn btn-basic')   #[img(src=val.mediumImage, alt='Smiley Image', height='80', class='iconimg hidden-sm img-circle')]
@@ -66,6 +88,6 @@ html(lang='en')
                                                                     a(class='btn btn-basic')   #[b Stock]
                                                                     a(class='btn btn-basic')   #{val.stock}
                                                         div(class='row')
-                                                            div(class='col-sm-1 col-md-4 btn-center')
-                                                                a(class='btn btn-basic')   #[img(src="https://sandbox.secure.checkout.visa.com/wallet-services-web/xo/button.png", alt='Visa Checkout', class="v-button", role="button")]
+                                                            div(class='col-sm-4 col-md-4 btn-center')
+                                                                a(class='btn btn-basic')   #[img(src="https://sandbox.secure.checkout.visa.com/wallet-services-web/xo/button.png", alt='Visa Checkout', class="v-button", role="button", onclick='onVisaCheckoutReady('+val.salePrice+','+val.standardShipRate+','+0+','+0+','+0+')')]
                                                         script(src="https://sandbox-assets.secure.checkout.visa.com/checkout-widget/resources/js/integration/v1/sdk.js")

@@ -1,28 +1,29 @@
-var request = require('request');
-var VisaAPIClient = require('../../libs/visaapiclient.js');
-var config = require('../../config/configuration.json');
-var assert = require('chai').assert;
-var req = request.defaults();
-var randomstring = require('randomstring');
+var VisaAPIClient = require('./visaapiclient');
+var config = require('./config');
 
-describe('Get Payment Data', function() {
-	var visaAPIClient = new VisaAPIClient();
+var express = require('express');
+var bodyParser = require("body-parser");
+var app = express();
 
-	it('Get Payment Information Test',function(done){
-		this.timeout(10000);
-		var apiKey = config.apiKey;
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.post('/',  function (req, res) {
+		var visaAPIClient = new VisaAPIClient();
+		var apiKey = config.credentials.apiKey;
 		var baseUri = 'wallet-services-web/';
 		var resourcePath = 'payment/data/{callId}';
-		resourcePath = resourcePath.replace('{callId}', config.checkoutCallId);
+		resourcePath = resourcePath.replace('{callId}', req.body.payment.callid);
 		var queryParams = 'apikey=' + apiKey;
 		visaAPIClient.doXPayRequest(baseUri, resourcePath, queryParams, '', 'GET', {}, 
-		function(err, responseCode) {
+		function(err, res, req) {
 			if(!err) {
-				assert.equal(responseCode, 200);
+				console.log(res); //to Payment gateway
 			} else {
-				assert(false);
+				console.log(err)
 			}
-			done();
 		});
-	});
-});
+		res.send('successful');
+	})
+	
+module.exports=app;
