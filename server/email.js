@@ -43,7 +43,7 @@ var email = (mailer, res) =>{
         to: mailer.receiverEmailId,
         subject:  ' Expecto ✔',
         text:'Dear Friend, Celebrate your loved ones imagination at https://pottercharm.herokuapp.com/grant?username='+mailer.receiverEmailId.substring(0, mailer.receiverEmailId.lastIndexOf("@"))+ '&domain='+mailer.receiverEmailId.substring(mailer.receiverEmailId.lastIndexOf("@") +1)+'. Cheers, Expecto*',
-        html: '<p>Dear Friend, </p><p><i>Celebrate </i> your loved ones <b>imagination</b> at https://pottercharm.herokuapp.com/grant?username='+mailer.receiverEmailId.substring(0, mailer.receiverEmailId.lastIndexOf("@"))+ '&domain='+mailer.receiverEmailId.substring(mailer.receiverEmailId.lastIndexOf("@") +1)+'</p><br/><p>Cheers,</p><p>Expecto*</p>'			   
+        html: '<p>Dear Friend, </p><p><i>Celebrate </i> your loved ones <b>imagination</b> at https://pottercharm.herokuapp.com/grant?username='+mailer.receiverEmailId.substring(0, mailer.receiverEmailId.lastIndexOf("@"))+ '&domain='+mailer.receiverEmailId.substring(mailer.receiverEmailId.lastIndexOf("@") +1)+'</p><p>Get some <i>inspiration </i> from  https://www.youtube.com/watch?v=0URpDxIjZrQ</p> <p>Like us at https://devpost.com/software/zauber </p><br/><p>Cheers,</p><p>Expecto*</p>'			   
     };
     transporter.sendMail(message, (err) => {
         if (err) {
