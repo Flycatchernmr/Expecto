@@ -21,7 +21,7 @@ app.post('/',  function (req, res) {
     email(mailer, res)    
 })
 var email = (mailer, res) =>{	
-	// Generate SMTP service account from ethereal.email
+	// Generate SMTP service account email
 	nodemailer.createTestAccount((err) => {
 		if (err) {
 			console.error('Failed to create a testing account. ' + err.message);
