@@ -42,8 +42,8 @@ var email = (mailer, res) =>{
         from: gmail_id,
         to: mailer.receiverEmailId,
         subject:  ' Expecto ✔',
-        text:'Dear Friend, Celebrate your loved ones imagination at https://pottercharm.herokuapp.com/grant?username='+mailer.receiverEmailId.substring(0, mailer.receiverEmailId.lastIndexOf("@"))+ '&domain='+mailer.receiverEmailId.substring(mailer.receiverEmailId.lastIndexOf("@") +1)+'. Cheers, Expecto*',
-        html: '<p>Dear Friend, </p><p><i>Celebrate </i> your loved ones <b>imagination</b> at https://pottercharm.herokuapp.com/grant?username='+mailer.receiverEmailId.substring(0, mailer.receiverEmailId.lastIndexOf("@"))+ '&domain='+mailer.receiverEmailId.substring(mailer.receiverEmailId.lastIndexOf("@") +1)+'. Remember to click the Home button....</p><p>Check Christopher Robin <i>inspiration </i> from  https://www.youtube.com/watch?v=0URpDxIjZrQ</p> <p>Like us at https://devpost.com/software/zauber </p><br/><p>Cheers,</p><p>Expecto*</p>'			   
+        text:'Dear Friend, Celebrate your loved ones fascinations at https://pottercharm.herokuapp.com/grant?username='+mailer.receiverEmailId.substring(0, mailer.receiverEmailId.lastIndexOf("@"))+ '&domain='+mailer.receiverEmailId.substring(mailer.receiverEmailId.lastIndexOf("@") +1)+'. Cheers, Expecto*',
+        html: '<p>Dear Friend, </p><p><i>Celebrate </i> your loved ones <b>fascinations</b> at https://pottercharm.herokuapp.com/grant?username='+mailer.receiverEmailId.substring(0, mailer.receiverEmailId.lastIndexOf("@"))+ '&domain='+mailer.receiverEmailId.substring(mailer.receiverEmailId.lastIndexOf("@") +1)+'. Remember to click the Home button to share yours....</p><p>Check Christopher Robin <i>inspiration </i> at  https://www.youtube.com/watch?v=0URpDxIjZrQ</p> <p>Like us at https://devpost.com/software/zauber </p><br/><p>Cheers,</p><p>Expecto*</p>'			   
     };
     transporter.sendMail(message, (err) => {
         if (err) {
