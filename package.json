@@ -11,7 +11,7 @@
     "fs": "*",
     "jquery": "*",
     "moment": "*",
-    "moment-timezone": "0.5.13",
+    "moment-timezone": "0.5.35",
     "mongoose": "4.12.3",
     "nodemailer": "^4.6.7",
     "nodemailer-smtp-transport": "^2.7.4",
