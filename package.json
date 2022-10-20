@@ -12,7 +12,7 @@
     "jquery": "*",
     "moment": "*",
     "moment-timezone": "0.5.13",
-    "mongoose": "4.12.3",
+    "mongoose": "4.13.21",
     "nodemailer": "^4.6.7",
     "nodemailer-smtp-transport": "^2.7.4",
     "path": "*",
